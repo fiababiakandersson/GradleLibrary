@@ -5,15 +5,24 @@ plugins {
 group = 'se.yrgo'
 version = '1.0-SNAPSHOT'
 
+defaultTasks 'compileJava', 'test' , 'javadoc'
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 test {
     useJUnitPlatform()
+}
+
+tasks.test {
+    testLogging {
+        events "passed", "skipped", "failed" // Show test outcomes
+    }
 }
